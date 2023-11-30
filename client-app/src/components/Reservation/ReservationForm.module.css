@@ -1,0 +1,29 @@
+.reserve-info {
+  flex: 1 0 0;
+}
+
+.reserve-info h1 {
+  margin-bottom: 10px;
+}
+
+.form label,
+.form input {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.form input {
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.form input::placeholder {
+  font-size: 16px;
+}
+
+.form label {
+  margin-bottom: 10px;
+  font-size: 16px;
+}

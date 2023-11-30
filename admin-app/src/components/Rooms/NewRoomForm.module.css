@@ -1,0 +1,92 @@
+.form-card {
+  margin-top: 20px;
+}
+
+.title {
+  margin-left: 20px;
+  font-size: 20px;
+  font-weight: 500;
+  color: #868e96;
+}
+
+/*Style form*/
+.form-container {
+  padding: 20px 40px;
+}
+
+.form-flexbox {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-item {
+  margin-bottom: 20px;
+}
+
+.form-flexbox input {
+  box-sizing: border-box;
+  width: 30vw;
+  max-width: 500px;
+}
+
+.form-flexbox input {
+  padding: 10px;
+  /* padding-left: 0; */
+  border: none;
+  border-bottom: 1px solid black;
+  /* color: red; */
+}
+
+.form-flexbox input:focus {
+  outline: none;
+}
+
+.form-flexbox textarea {
+  width: 15vw;
+  max-width: 500px;
+  height: 40px;
+}
+
+/*Style label*/
+.label {
+  margin: 0;
+}
+
+/*Style button*/
+.btn-submit {
+  margin-top: 30px;
+}
+
+.btn-submit button {
+  padding: 10px 40px;
+  background-color: #268a6c;
+  border: none;
+  color: white;
+}
+
+.btn-submit button:hover {
+  cursor: pointer;
+  background-color: #155844;
+}
+
+.form-flexbox input.error {
+  background-color: #ffc9c9;
+  border-bottom: 1px solid #f03e3e;
+  border-radius: 2px;
+}
+
+/*Báo lỗi input*/
+.error-dot {
+  margin-left: 10px;
+  color: #f03e3e;
+}
+
+.error-textarea {
+  border: 1px solid #f03e3e;
+}
+
+.error-submit {
+  margin-left: 20px;
+  color: #f03e3e;
+  text-align: center;
+}

@@ -1,0 +1,45 @@
+.hotels-container {
+  max-width: 1200px;
+  margin: auto;
+  padding-top: 30px;
+}
+
+.hotels-flex {
+  padding-top: 40px;
+  display: flex;
+  gap: 30px;
+  /* justify-content: space-around; */
+}
+
+.hotel {
+  flex: 1 1 0;
+}
+
+.hotel-img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 3px;
+}
+
+.hotel-city {
+  color: #868e96;
+  font-weight: 500;
+  padding-top: 10px;
+}
+
+.hotel-price {
+  padding-top: 10px;
+  font-size: 16px;
+}
+
+.hotel-rate {
+  padding-top: 10px;
+}
+.hotel-rate-point {
+  background-color: #1864ab;
+  color: white;
+  font-weight: bold;
+  padding: 3px 3px;
+  margin-right: 8px;
+}

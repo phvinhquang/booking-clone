@@ -1,0 +1,42 @@
+.signup {
+  margin-top: 60px;
+  background-color: #1864ab;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.signup-container {
+  max-width: 1200px;
+  margin: auto;
+  text-align: center;
+}
+
+.signup-form {
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.signup-form-input {
+  width: 280px;
+  border: none;
+  outline: none;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.btn-subcribe {
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.signup h3 {
+  margin-top: 10px;
+  font-weight: 300;
+}

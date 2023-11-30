@@ -1,0 +1,62 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 30px;
+  column-gap: 60px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+/*Style tổng thể mỗi phòng*/
+.room-flexbox {
+  display: flex;
+}
+
+.room-info {
+  flex: 3 1 0;
+}
+
+.room-info h3,
+h4 {
+  font-weight: 600;
+}
+
+.room-info h5 {
+  font-size: 18px;
+}
+
+.room-info p {
+  font-size: 17px;
+  width: 90%;
+}
+
+.room-info span {
+  font-weight: bold;
+}
+
+.room-available {
+  flex: 1 1 0;
+  text-align: center;
+}
+
+/*Style cân giữa check box*/
+.form {
+  display: flex;
+  gap: 10px;
+}
+
+.checkbox {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.checkbox input {
+  display: block;
+}
+
+/*Báo hết phòng*/
+.no-room {
+  font-size: 18px;
+  font-style: italic;
+}

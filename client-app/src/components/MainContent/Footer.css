@@ -1,0 +1,23 @@
+.footer-container {
+  padding-bottom: 40px;
+  padding-top: 30px;
+}
+
+.footer-flex {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1000px;
+  margin: auto;
+}
+
+/*Style footer item*/
+.footer-item a:link,
+.footer-item a:visited,
+.footer-item a:hover,
+.footer-item a:active {
+  display: inline-block;
+  color: #228be6;
+  text-decoration: none;
+  padding: 5px 0;
+  font-size: 14px;
+}

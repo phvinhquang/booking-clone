@@ -1,0 +1,56 @@
+.overall-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.overall-item {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.overall-item p {
+  font-size: 14px;
+  margin: 0;
+}
+
+.overall-item h3 {
+  font-weight: 500;
+  padding-left: 10px;
+  font-size: 24px;
+}
+
+/*Sytle icon*/
+.icon {
+  width: 100%;
+  text-align: right;
+}
+
+.users-icon {
+  padding: 3px 6px;
+  border-radius: 4px;
+  background-color: #ffdeeb;
+  color: red;
+}
+
+.orders-icon {
+  padding: 3px 4px;
+  border-radius: 4px;
+  background-color: #ffec99;
+  color: #fcc419;
+}
+
+.earnings-icon {
+  padding: 3px 8px;
+  border-radius: 4px;
+  background-color: #b2f2bb;
+  color: green;
+}
+
+.balance-icon {
+  padding: 3px 5px;
+  border-radius: 4px;
+  background-color: #eebefa;
+  color: #cc5de8;
+}

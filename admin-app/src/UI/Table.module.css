@@ -1,0 +1,58 @@
+/*Style border cho bảng*/
+.table {
+  width: 100%;
+  border: 1px solid #dee2e6;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 10px;
+}
+
+.table th {
+  text-align: left;
+}
+
+.table tr {
+  border: 1px solid #dee2e6;
+}
+
+.table th p {
+  margin: 0;
+  padding-left: 8px;
+  border-left: 2px solid #dee2e6;
+}
+
+.table td {
+  padding-left: 20px;
+}
+
+/*Style phần pagination*/
+.empty-div {
+  height: 20px;
+  border: 1px solid #dee2e6;
+  border-top: none;
+}
+
+.paging-div {
+  height: 50px;
+  border: 1px solid #dee2e6;
+  border-top: none;
+  padding-right: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 20px;
+}
+
+.paging-div button {
+  background-color: transparent;
+  border: none;
+  padding-top: 5px;
+}
+
+.paging-div button:disabled {
+  cursor: not-allowed;
+}

@@ -1,0 +1,56 @@
+/*Style tổng thể bảng*/
+table,
+th,
+td {
+  border: 1px solid #dee2e6;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  padding: 10px 5px;
+  background-color: #22b8cf;
+}
+
+td {
+  padding: 10px 8px;
+}
+
+.number {
+  text-align: center;
+}
+
+.gray {
+  background-color: #e9ecef;
+}
+
+/*Style phần status*/
+.booked {
+  background-color: #ff8787;
+  color: green;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.checkout {
+  background-color: #d0bfff;
+  color: green;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.checkin {
+  background-color: #51cf66;
+  color: blue;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.loading {
+  text-align: center;
+  font-size: 20px;
+  color: #1864ab;
+}

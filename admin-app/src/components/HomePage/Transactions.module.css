@@ -1,0 +1,75 @@
+.container {
+  margin: 30px;
+}
+
+.transactions-card {
+  margin-top: 60px;
+}
+
+.transactions-card .checkbox {
+  padding-left: 20px;
+}
+
+.checkbox input {
+  width: 18px;
+  height: 18px;
+}
+/* .table {
+  width: 100%;
+  border: 1px solid #dee2e6;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 10px;
+}
+
+.table th {
+  text-align: left;
+}
+
+.table tr {
+  border: 1px solid #dee2e6;
+}
+
+.table th p {
+  margin: 0;
+  padding-left: 8px;
+  border-left: 2px solid #dee2e6;
+}
+
+.table td {
+  padding-left: 20px;
+} */
+
+/*Style 1 số cột*/
+.payment-column {
+  width: 6vw;
+}
+
+.status span {
+  margin-left: 10px;
+}
+
+/*Style phần status*/
+.booked {
+  background-color: #ff8787;
+  color: green;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.checkout {
+  background-color: #d0bfff;
+  color: green;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.checkin {
+  background-color: #51cf66;
+  color: blue;
+  padding: 5px;
+  border-radius: 5px;
+}

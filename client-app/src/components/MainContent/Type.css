@@ -1,0 +1,35 @@
+.types-container {
+  padding-top: 30px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/*Xếp ảnh nằm cạnh nhau bằng flex*/
+.types-flex {
+  padding-top: 40px;
+  display: flex;
+  gap: 30px;
+  justify-content: space-between;
+}
+
+.type {
+  flex: 1 1 0;
+}
+
+/*Style ảnh*/
+.type-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+/*Style text của types*/
+.type-text h3 {
+  color: black;
+}
+
+.type-text h3:last-child {
+  color: #868e96;
+  font-weight: 500;
+}

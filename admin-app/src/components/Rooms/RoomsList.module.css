@@ -1,0 +1,64 @@
+/*Style header*/
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/*Style phần checkbox*/
+.rooms-list-table .checkbox {
+  padding-left: 20px;
+}
+
+.checkbox input {
+  width: 18px;
+  height: 18px;
+}
+
+.btn-new {
+  color: #2f9e44;
+  border: 1px solid #2f9e44;
+  background-color: transparent;
+  padding: 8px 10px;
+  border-radius: 5px;
+}
+
+.btn-new:hover {
+  background-color: #2f9e44;
+  color: white;
+  cursor: pointer;
+}
+
+.btn-delete {
+  color: #e03131;
+  border: 1px solid #e03131;
+  background-color: transparent;
+  padding: 8px 10px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.btn-delete:hover {
+  background-color: #e03131;
+  color: white;
+  cursor: pointer;
+}
+
+.btn-new a:link,
+.btn-new a:active,
+.btn-new a:visited,
+.btn-new a:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+/*style kích thước cột desc và max people*/
+.desc {
+  width: 25vw;
+  max-width: 25vw;
+}
+
+.max-people {
+  width: 2vw;
+  text-align: center;
+}

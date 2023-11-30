@@ -1,0 +1,74 @@
+.header {
+  background-color: #1864ab;
+  color: white;
+  position: relative;
+  padding-bottom: 80px;
+}
+
+.header-auth {
+  background-color: #1864ab;
+  color: white;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: auto;
+}
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+}
+
+.header-title {
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+}
+
+.header-container a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.header-nav p {
+  display: inline-block;
+}
+
+.header-nav-button {
+  background-color: white;
+  color: #228be6;
+  display: inline-block;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 5px 10px;
+  border: 1px solid white;
+  cursor: pointer;
+}
+
+.header-nav-button:active {
+  background-color: #228be6;
+  color: white;
+}
+
+.header h2 {
+  font-size: 30px;
+  margin-bottom: 16px;
+}
+
+.header h3 {
+  font-size: 18px;
+  font-weight: lighter;
+  margin-bottom: 12px;
+}
+
+/*chỉnh vị trí form vào giữa*/
+.form-absolute {
+  position: absolute;
+  bottom: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}

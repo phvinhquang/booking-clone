@@ -1,0 +1,94 @@
+/*Display form flex và style tổng thể*/
+.form {
+  height: 70px;
+  border: 4px solid #fab005;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  background-color: white;
+  color: #868e96;
+}
+
+/*Style các phần input*/
+.input i {
+  color: #868e96;
+}
+
+.form input {
+  outline: none;
+  border: none;
+  font-size: 16px;
+}
+
+.input {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.btn-input-form {
+  width: 100%;
+  height: 65%;
+  font-size: 17px;
+  align-self: center;
+}
+
+.link-search:link,
+.link-search:visited,
+.link-search:hover,
+.link-search:active {
+  text-decoration: none;
+  color: inherit;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.input-date span,
+.input-people span {
+  cursor: pointer;
+}
+
+/*Chỉnh vị trí date range*/
+.date-range {
+  position: absolute;
+  bottom: -360px;
+  z-index: 2;
+}
+
+/*Style options*/
+.options-form {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px -5px #999;
+  position: absolute;
+  bottom: -158px;
+  width: 250px;
+}
+
+.options-form-item {
+  margin: 20px;
+  /* margin-top: 20px; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.options-form-item-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.form-item-button {
+  width: 25px;
+  height: 25px;
+  border: 1px solid black;
+}
+
+.form-item-button:hover {
+  cursor: pointer;
+  background-color: lightskyblue;
+}

@@ -1,0 +1,149 @@
+//Hiển thị city và số properties mỗi city có. DONE
+# GET http://localhost:5000/cities
+
+//Hiển thị theo loại properties. DONE
+# GET http://localhost:5000/property-types
+
+//Hiển thị theo đánh giá. DONE
+# GET http://localhost:5000/top-rate
+
+//Hotel Detaiil
+# GET http://localhost:5000/hotels/6311bf37f2fce6ea18172fb6
+
+
+//Login
+# POST  http://localhost:5000/login
+# content-type: application/json
+
+# {
+#   "username": "Quang",
+#   "password": "11111111"
+# }
+
+//Register
+# POST  http://localhost:5000/register
+# content-type: application/json
+
+# {
+#   "username": "Quang",
+#   "password": "11111111",
+#   "phone": "0335109989",
+#   "email": "phvinhquang@gmail.com",
+#   "fullName": "Phạm Hoàng Vinh Quang"
+# }
+
+
+//Search khách sạn phù hợp. DONE
+# POST http://localhost:5000/search
+# Content-Type: application/json
+
+# {
+#   "city": "ho chi minh",
+#   "dateStart": "2023-10-9",
+#   "dateEnd": "2023-10-11",
+#   "people": "5",
+#   "room": "3"
+# }
+
+//Search phòng trống của 1 khách sạn. DONE
+# POST  http://localhost:5000/rooms/6311bd07f2fce6ea18172fa3
+# Content-Type: application/json
+
+# {
+#   "dateStart": "2023-09-26",
+#   "dateEnd": "2023-09-27"
+# }
+
+//Search thông tin của active user.
+# GET   http://localhost:5000/userInfo?token=64ff431612c8dc343fa84ed0
+
+//Request tạo transaction
+# POST http://localhost:5000/transactions/add-transaction?token=64ff431612c8dc343fa84ed0
+# Content-Type: application/json
+
+# {
+#   "user":"Quang",
+#   "hotel":"6311bd07f2fce6ea18172fa3",
+#   "room":[{"roomType": "6311be30f2fce6ea18172fa8",
+#   "roomNumbers": [101]}],
+#   "dateStart":"2023-09-26",
+#   "dateEnd":"2023-09-26",
+#   "price":300,
+#   "payment":"Cash Testing",
+#   "status": "Booked"
+# }
+
+//Lấy dữ liệu 8 transactions gần nhất
+# GET http://localhost:5000/admin/transactions?token=64ff431612c8dc343fa84ed0
+
+//Lấy dữ liệu Hotel list
+# GET http://localhost:5000/admin/hotels?token=64ff431612c8dc343fa84ed0
+
+# //Tạo hotel mới
+# POST http://localhost:5000/admin/new-hotel?token=64ff431612c8dc343fa84ed0
+# Content-Type: application/json
+
+# {
+#   "name":"Mâm's Hotellllll",
+#   "type": "hotel",
+#   "city": "Ha Noi",
+#   "address": "36 Nguyen Chi Thanh, Ba Dinh, Ha Noi",
+#   "distance": "10",
+#   "cheapestPrice":"100",
+#   "photos": ["324324","234234234"],
+#   "desc": "Something really long and stupid",
+#   "rating": "3",
+#   "featured": "false",
+#   "title":"Best hotel in town",
+#   "rooms": ["2 Bed Room", "1 Bed Room"]
+# }
+
+// Request xóa hotel
+# POST http://localhost:5000/admin/delete-hotel?token=64ff431612c8dc343fa84ed0
+# Content-Type: application/json
+
+# {"hotelId":"6311a54a4a642f0142349086"}
+
+// Fetch rooms
+# GET http://localhost:5000/admin/rooms?token=64ff431612c8dc343fa84ed0
+
+// Request xóa room
+# POST http://localhost:5000/admin/delete-room?token=64ff431612c8dc343fa84ed0
+# Content-Type: application/json
+
+# {"roomId":"6310dd998cfecfd90b30ca28"}
+
+//Room detail
+# GET http://localhost:5000/admin/rooms/6311be30f2fce6ea18172fa8?token=64ff431612c8dc343fa84ed0
+
+# //Edit Room
+# POST http://localhost:5000/admin/edit-room/651ad044386fe521fb14e3c2?token=64ff431612c8dc343fa84ed0
+# Content-Type: application/json
+
+# {
+#       "title": titleInputValue,
+#       price: priceInputValue,
+#       desc: descInputValue,
+#       maxPeople: maxPeopleInputValue,
+#       roomNumbers: roomNumsTrimmedData,
+#     }
+
+//Hotel detail
+# GET http://localhost:5000/admin/hotels/6311a9c64a642f01423490bf?token=64ff431612c8dc343fa84ed0
+
+
+//Login admin
+# POST  http://localhost:5000/admin/login
+# content-type: application/json
+
+# {
+#   "username": "Quang",
+#   "password": "11111111"
+# }
+
+// Get overall info
+
+# GET  http://localhost:5000/admin/overall?token=64ff431612c8dc343fa84ed0
+
+//Hiển thị city và số properties mỗi city có. DONE
+GET http://localhost:5000/overall

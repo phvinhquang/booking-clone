@@ -1,0 +1,40 @@
+main {
+  display: grid;
+  grid-template-columns: min-content min-content 1fr;
+  /* width: 90vw; */
+  margin: auto;
+}
+
+.title {
+  /* border-bottom: 1px solid #dee2e6; */
+  font-size: 24px;
+  width: fit-content;
+  padding-bottom: 20px;
+  color: #845ef7;
+  margin: 20px 30px 0 30px;
+}
+
+.title a:link,
+.title a:visited,
+.title a:active {
+  text-decoration: none;
+  color: inherit;
+}
+
+/*Tạo đường border dọc và ngang*/
+.vertical {
+  width: 1px;
+  background-color: #dee2e6;
+  /* grid-row: 2 / -2; */
+}
+
+.line {
+  background-color: #dee2e6;
+  height: 1px;
+  grid-column: 1/-1;
+}
+
+/*Thụt lề cho oulet*/
+.outlet {
+  margin: 20px;
+}

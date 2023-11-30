@@ -1,0 +1,79 @@
+/*Style tổng thể popup card*/
+.card-popup {
+  background-color: #fab005;
+  height: 60%;
+  width: 60%;
+  min-width: 300px;
+  max-width: 350px;
+  padding: 20px;
+  margin-top: 40px;
+  border-radius: 20px;
+}
+
+/*Chữ search*/
+.card-popup h1 {
+  margin-bottom: 30px;
+}
+
+/*Style phần options*/
+.input-flex {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  align-items: center;
+}
+
+.input-flex input {
+  width: 20%;
+  height: 30px;
+  border: none;
+  outline: none;
+}
+
+.card-popup h4 {
+  margin-bottom: 10px;
+}
+
+.input-destination,
+.input-date-popup {
+  margin-bottom: 30px;
+}
+
+.input-destination input {
+  width: 100%;
+  height: 40px;
+  border: none;
+  outline: none;
+}
+
+.input-date-popup span {
+  display: inline-block;
+  background-color: white;
+  width: 80%;
+  text-align: center;
+  font-size: 18px;
+  color: #868e96;
+}
+
+.input-date-popup-text {
+  background-color: white;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-date-popup i {
+  color: #868e96;
+}
+
+.smaller-text {
+  font-size: 14px;
+}
+
+/*Nút Search*/
+.btn-popup-search {
+  width: 100%;
+  font-size: 22px;
+  font-weight: 400;
+}
