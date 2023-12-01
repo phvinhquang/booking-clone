@@ -1,4 +1,8 @@
+require("dotenv").config();
+
 const User = require("../models/user");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 exports.postRegister = (req, res, next) => {
   const username = req.body.username;
@@ -31,23 +35,29 @@ exports.postRegister = (req, res, next) => {
 
       // Nếu không có thì tạo user mới
       if (user.length === 0) {
-        const user = new User({
-          username: username,
-          password: password,
-          fullName: fullName,
-          phoneNumber: phone,
-          email: email,
-          isAdmin: false,
-        });
-
-        //Lưu user mới
-        user
-          .save()
+        // Mã hóa password với bcrypt
+        return bcrypt
+          .hash(password, 12)
+          .then((hashedPassword) => {
+            const user = new User({
+              username: username,
+              password: hashedPassword,
+              fullName: fullName,
+              phoneNumber: phone,
+              email: email,
+              isAdmin: false,
+            });
+            //Lưu user mới
+            return user.save();
+          })
           .then(() => {
             res.status(201).json("Tạo tài khoản thành công");
           })
           .catch((err) => {
-            console.log(err);
+            if (!err.statusCode) {
+              err.statusCode = 500;
+              next(err);
+            }
           });
       }
     })
@@ -59,8 +69,10 @@ exports.postRegister = (req, res, next) => {
 exports.postLogin = (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
+  let userId;
+  let email;
 
-  User.findOne({ username: username, password: password })
+  User.findOne({ username: username })
     .then((user) => {
       if (!user) {
         res
@@ -69,17 +81,37 @@ exports.postLogin = (req, res, next) => {
       }
 
       if (user) {
-        const data = {
-          username: username,
-          email: user.email,
-          id: user._id,
-        };
-
-        res.status(201).json(data);
+        userId = user._id;
+        email = user.email;
+        return bcrypt.compare(password, user.password);
       }
     })
+    .then((isMatch) => {
+      if (!isMatch) {
+        const err = new Error("Thông tin đăng nhập không đúng");
+        err.statusCode = 403;
+        throw err;
+      }
+      // Nếu pass đúng thì tạo jwt gửi xuống
+      // Tạo jwt ở đây
+      const token = jwt.sign(
+        { userId: userId.toString() },
+        process.env.ACCESS_TOKEN,
+        { expiresIn: "2d" }
+      );
+      const data = {
+        username: username,
+        email: email,
+        // id: userId,
+      };
+
+      res.status(201).json({ userData: data, token: token });
+    })
     .catch((err) => {
-      res.status(500).json(err);
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
     });
 };
 
@@ -122,9 +154,7 @@ exports.postAdminLogin = (req, res, next) => {
 
 // Thông tin người dùng để đưa vào phần đặt phòng
 exports.getUserInfo = (req, res, next) => {
-  const token = req.query.token;
-
-  User.findOne({ _id: token })
+  User.findOne({ _id: req.userId })
     .then((user) => {
       const data = {
         username: user.username,

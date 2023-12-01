@@ -76,7 +76,7 @@ const reserveSlice = createSlice({
         price: updatedPrice,
       };
 
-      console.log(newState);
+      // console.log(newState);
       return newState;
     },
 

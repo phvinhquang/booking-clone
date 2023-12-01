@@ -1,4 +1,5 @@
 const express = require("express");
+const isAuth = require("../middleware/is-auth");
 
 const router = express.Router();
 
@@ -10,6 +11,6 @@ router.post("/register", authController.postRegister);
 
 router.post("/admin/login", authController.postAdminLogin);
 
-router.get("/userInfo", authController.getUserInfo);
+router.get("/userInfo", isAuth, authController.getUserInfo);
 
 module.exports = router;

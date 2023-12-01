@@ -25,11 +25,12 @@ const Payment = function ({ userInfo }) {
 
     try {
       const req = await fetch(
-        `http://localhost:5000/transactions/add-transaction?token=${token}`,
+        `http://localhost:5000/transactions/add-transaction`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
           },
           body: JSON.stringify(bodyData),
         }
@@ -37,7 +38,7 @@ const Payment = function ({ userInfo }) {
 
       const data = await req.json();
 
-      if (req.status === 501) {
+      if (req.status === 501 || req.status === 401 || req.status === 403) {
         setError(data);
       }
     } catch (err) {
@@ -45,7 +46,7 @@ const Payment = function ({ userInfo }) {
     }
 
     setIsLoading(false);
-    navigate("/");
+    navigate("/transactions");
   };
 
   // Xử lý sự kiện chọn payment method
@@ -116,7 +117,11 @@ const Payment = function ({ userInfo }) {
         <Button className={classes.btn} onClick={reserveHandler}>
           Reserve Now
         </Button>
-        {isLoading && <span className={classes.loading}>Loading ...</span>}
+        {isLoading && (
+          <span className={classes.loading}>
+            Đang xử lý đơn hàng của bạn...
+          </span>
+        )}
         {error && <span className={classes.error}>{error}</span>}
       </div>
     </div>

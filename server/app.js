@@ -21,26 +21,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 
-//Tạo 1 middleware check token, nếu có token thì tìm user rồi next, không có thì cũng next
-//Tạo 1 middlware trong file middleware check auth, nếu not auth thì res.send lỗi unauth
-app.use((req, res, next) => {
-  const token = req.query.token;
-  if (!token) {
-    return next();
-  }
-
-  User.findById(token)
-    .then((user) => {
-      req.user = user;
-      next();
-    })
-    .catch(() => res.status(401).json("Unauthorized"));
-});
-
 app.use(authRoutes);
 app.use(hotelsRoutes);
 app.use(transactionsRoutes);
 app.use(adminRoutes);
+
+app.use((error, req, res, next) => {
+  const status = error.statusCode || 500;
+  const message = error.message;
+  const data = error.data;
+  res.status(status).json({ message: message, data: data });
+});
 
 mongoose
   .connect(
