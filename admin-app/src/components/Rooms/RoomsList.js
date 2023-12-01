@@ -17,9 +17,11 @@ const RoomsList = function () {
     setIsLoading(true);
 
     try {
-      const res = await fetch(
-        `http://localhost:5000/admin/rooms?token=${token}`
-      );
+      const res = await fetch(`http://localhost:5000/admin/rooms`, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
 
       const data = await res.json();
       setRooms(data);
@@ -33,16 +35,14 @@ const RoomsList = function () {
     setIsDeleting({ delete: true, id: roomId });
 
     try {
-      const req = await fetch(
-        `http://localhost:5000/admin/delete-room?token=${token}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(requestData),
-        }
-      );
+      const req = await fetch(`http://localhost:5000/admin/delete-room`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify(requestData),
+      });
 
       const data = await req.json();
 

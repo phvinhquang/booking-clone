@@ -3,8 +3,6 @@ export const getTokenDuration = function () {
   const expirationDate = new Date(storedExpirationDate);
   const now = new Date();
   const duration = expirationDate.getTime() - now.getTime();
-  uuuuuuuuuuuuuuuuuu;
-
   return duration;
 };
 

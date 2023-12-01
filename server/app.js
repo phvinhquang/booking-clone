@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
+const bcrypt = require("bcryptjs");
+
 const User = require("./models/user");
 // const Transaction = require("./models/transaction");
 
@@ -20,6 +22,32 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
+
+// Tạo 1 admin ban đầu, deploy thì xóa đi
+// app.use((req, res) => {
+//   const password = "quangpham";
+
+//   bcrypt
+//     .hash(password, 12)
+//     .then((hashedPassword) => {
+//       const user = new User({
+//         username: "quangpham",
+//         password: hashedPassword,
+//         fullName: "Phạm Hoàng Vinh Quang",
+//         phoneNumber: "0934567897",
+//         email: "quangpham@gmail.com",
+//         isAdmin: true,
+//       });
+
+//       return user.save();
+//     })
+//     .then(() => {
+//       res.status(201);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// });
 
 app.use(authRoutes);
 app.use(hotelsRoutes);

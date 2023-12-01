@@ -13,15 +13,18 @@ const Transactions = function ({ resultsPerPage, title }) {
 
   // Hàm fetch transaction của người dùng
   const fetchTransactions = useCallback(async function () {
-    let url = `http://localhost:5000/admin/transactions/latest?token=${token}&resultsPerPage=${resultsPerPage}`;
+    let url = `http://localhost:5000/admin/transactions/latest?resultsPerPage=${resultsPerPage}`;
     if (!resultsPerPage) {
-      url = `http://localhost:5000/admin/transactions/all?token=${token}`;
+      url = `http://localhost:5000/admin/transactions/all`;
     }
 
     try {
-      const res = await fetch(url);
+      const res = await fetch(url, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
       const data = await res.json();
-      console.log(data);
 
       setTransactions(data.results);
     } catch (err) {

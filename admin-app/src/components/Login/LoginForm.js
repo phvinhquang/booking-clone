@@ -57,12 +57,18 @@ const LoginForm = function () {
       const data = await req.json();
 
       if (req.status === 201) {
-        dispatch(authActions.logIn({ token: data.id, email: data.email }));
+        dispatch(
+          authActions.logIn({ token: data.token, email: data.userData.email })
+        );
         navigate("/");
       }
 
       if (req.status === 401) {
         setHttpError(data);
+      }
+
+      if (req.status === 403) {
+        setHttpError(data.message);
       }
     } catch (err) {
       setHttpError(err.message);

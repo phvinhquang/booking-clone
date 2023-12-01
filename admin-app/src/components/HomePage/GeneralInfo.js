@@ -11,9 +11,11 @@ const GerneralInfo = function () {
   //Hàm fetch thông tin chung
   const fetchGeneralInfo = async function () {
     try {
-      const res = await fetch(
-        `http://localhost:5000/admin/overall?token=${token}`
-      );
+      const res = await fetch(`http://localhost:5000/admin/overall?token`, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
 
       const data = await res.json();
       setGeneralInfo(data);

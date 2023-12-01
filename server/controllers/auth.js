@@ -118,8 +118,10 @@ exports.postLogin = (req, res, next) => {
 exports.postAdminLogin = (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
+  let userId;
+  let email;
 
-  User.findOne({ username: username, password: password })
+  User.findOne({ username: username })
     //Kiểm tra xem có người dùng nào có thông tin trùng khớp không
     .then((user) => {
       if (!user) {
@@ -128,27 +130,45 @@ exports.postAdminLogin = (req, res, next) => {
           .json("Thông tin đăng nhập chưa chính xác, vui lòng thử lại");
       }
 
-      //Nếu có người dùng và là admin thì cho đăng nhập
-      if (user && user.isAdmin) {
-        console.log(user.isAdmin);
-        const data = {
-          username: username,
-          email: user.email,
-          id: user._id,
-        };
-
-        return res.status(201).json(data);
-      }
-
       //Nếu có người dùng không phải admin thì báo lỗi
       if (user && !user.isAdmin) {
         return res
           .status(401)
           .json("Bạn không phải admin, hãy quay lại khi bạn là admin :)");
       }
+
+      //Nếu có người dùng và là admin thì cho đăng nhập
+      if (user && user.isAdmin) {
+        userId = user._id;
+        email = user.email;
+        return bcrypt.compare(password, user.password);
+      }
+    })
+    .then((isMatch) => {
+      if (!isMatch) {
+        const err = new Error("Thông tin đăng nhập không đúng");
+        err.statusCode = 403;
+        throw err;
+      }
+
+      // Nếu pass đúng thì tạo jwt gửi xuống
+      const token = jwt.sign(
+        { userId: userId.toString() },
+        process.env.ACCESS_TOKEN,
+        { expiresIn: "2d" }
+      );
+      const data = {
+        username: username,
+        email: email,
+      };
+
+      res.status(201).json({ userData: data, token: token });
     })
     .catch((err) => {
-      res.status(500).json(err);
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
     });
 };
 
