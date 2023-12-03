@@ -102,7 +102,7 @@ const HotelsList = function () {
       </div>
 
       <div className={classes["hotels-list-container"]}>
-        {isLoading && <p>Loading Hotels List</p>}
+        {isLoading && <p>Loading Hotels List ...</p>}
         {!isLoading && (
           <Table resultsPerPage={hotels.length} totalPage="1">
             <thead>

@@ -91,7 +91,7 @@ const RoomsList = function () {
         </div>
       </div>
 
-      {isLoading && <p>Loading Rooms List</p>}
+      {isLoading && <p>Loading Rooms List ...</p>}
       {!isLoading && (
         <Table
           resultsPerPage={rooms.length}

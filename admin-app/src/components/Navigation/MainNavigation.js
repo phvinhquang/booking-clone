@@ -28,10 +28,10 @@ const MainNavigation = function () {
       </NavLink>
 
       <h3>LISTS</h3>
-      <NavLink to="/">
+      {/* <NavLink to="/">
         <i className="fa-regular fa-user"></i>
         <span>Users</span>
-      </NavLink>
+      </NavLink> */}
       <NavLink to="/hotels">
         <i className="fa-solid fa-hotel"></i>
         <span>Hotels</span>
