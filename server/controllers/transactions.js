@@ -50,3 +50,5 @@ exports.getTransactions = (req, res, next) => {
       res.status(500).json("Something went wrong");
     });
 };
+
+// This should show up
