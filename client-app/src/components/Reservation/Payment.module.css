@@ -28,3 +28,9 @@
   color: red;
   margin-left: 30px;
 }
+
+.loading {
+  margin-left: 20px;
+  font-style: 24px;
+  color: #1864ab;
+}

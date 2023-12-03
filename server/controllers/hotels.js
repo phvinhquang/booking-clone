@@ -86,7 +86,7 @@ exports.postHotelSearch = (req, res, next) => {
       const filteredByCity = hotels.filter(
         (hotel) => hotel.city.toLowerCase() === city.toLowerCase()
       );
-      console.log("city", filteredByCity);
+      // console.log("city", filteredB/yCity);
 
       return filteredByCity;
     })

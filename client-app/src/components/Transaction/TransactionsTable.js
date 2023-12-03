@@ -6,6 +6,7 @@ import { format } from "date-fns";
 const TransactionsTable = function () {
   const [transactions, setTransactions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   const token = getToken();
 
   // Hàm fetch transaction của người dùng
@@ -14,14 +15,21 @@ const TransactionsTable = function () {
       setIsLoading(true);
 
       try {
-        const res = await fetch(
-          `http://localhost:5000/transactions?token=${token}`
-        );
+        const res = await fetch(`http://localhost:5000/transactions`, {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        });
+
+        if (!res.ok) {
+          throw new Error("Sorry, something went wrong :(");
+        }
+
         const data = await res.json();
 
         setTransactions(data);
       } catch (err) {
-        console.log(err);
+        setError(err.message);
       }
 
       setIsLoading(false);
@@ -64,10 +72,11 @@ const TransactionsTable = function () {
 
   return (
     <>
+      {error && <p className={classes.error}>{error}</p>}
       {isLoading && (
         <p className={classes.loading}>Loading your transactions...</p>
       )}
-      {transactions.length === 0 && (
+      {transactions.length === 0 && !isLoading && (
         <p className={classes.loading}>Bạn chưa có giao dịch nào</p>
       )}
       {!isLoading && transactions.length > 0 && (
@@ -93,7 +102,7 @@ const TransactionsTable = function () {
                 <td>{transaction.hotel.title}</td>
                 <td>
                   {transaction.room.map((r, i) => (
-                    <span>
+                    <span key={r.roomNumbers}>
                       {i !== 0 && ", "}
                       {r.roomNumbers.join(", ")}
                     </span>

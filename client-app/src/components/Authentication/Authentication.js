@@ -146,22 +146,36 @@ const Authentication = function () {
         );
 
         //Check lỗi
-        if (!req.ok && req.status !== 401 && req.status !== 409) {
+        if (
+          !req.ok &&
+          req.status !== 401 &&
+          req.status !== 409 &&
+          req.status !== 403
+        ) {
           throw new Error("Something went wrong");
         }
 
         const data = await req.json();
-        const token = data.id;
-        const email = data.email;
+        console.log(data);
+        // Nhận và lưu token
+        const token = data.token;
+        const email = data.userData.email;
 
-        //Nếu request trả về token thì lưu lại
+        // Nếu request trả về token thì lưu lại
         if (token) {
+          const remainingMilliseconds = 1000 * 60 * 60 * 24 * 2;
+          const expiryDate = new Date(
+            new Date().getTime() + remainingMilliseconds
+          );
+
           localStorage.setItem("token", token);
+          localStorage.setItem("tokenExpiryDate", expiryDate.toISOString());
+          // Set auto logout
         }
 
         if (email) {
           dispatch(authActions.logIn(email));
-          localStorage.setItem("username", email);
+          localStorage.setItem("email", email);
         }
 
         //Check lỗi được gửi về từ server
@@ -171,6 +185,10 @@ const Authentication = function () {
 
         if (req.status === 409) {
           throw new Error(data);
+        }
+
+        if (req.status === 403) {
+          throw new Error(data.message);
         }
 
         if (req.ok && isLogin) {

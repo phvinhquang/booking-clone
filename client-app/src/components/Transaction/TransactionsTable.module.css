@@ -54,3 +54,9 @@ td {
   font-size: 20px;
   color: #1864ab;
 }
+
+.error {
+  text-align: center;
+  font-size: 24px;
+  color: #aaa;
+}

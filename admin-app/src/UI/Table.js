@@ -2,7 +2,6 @@ import classes from "./Table.module.css";
 
 const Table = function (props) {
   const styles = classes.table + ` ${props.className}`;
-  console.log(props.className);
 
   return (
     <>

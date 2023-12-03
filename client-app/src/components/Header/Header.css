@@ -23,7 +23,7 @@
 }
 
 .header-title {
-  font-size: 24px;
+  font-size: 1.9rem;
   color: white;
   cursor: pointer;
 }
@@ -38,6 +38,7 @@
 }
 
 .header-nav-button {
+  font-size: 16px;
   background-color: white;
   color: #228be6;
   display: inline-block;

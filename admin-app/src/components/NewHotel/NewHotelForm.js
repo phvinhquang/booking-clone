@@ -153,9 +153,9 @@ const NewHotelForm = function () {
     setIsLoaing(true);
 
     //Set url theo trạng thái edit hoặc tạo mới
-    let url = `http://localhost:5000/admin/new-hotel?token=${token}`;
+    let url = `http://localhost:5000/admin/new-hotel`;
     if (isEdit) {
-      url = `http://localhost:5000/admin/edit-hotel/${hotelId}?token=${token}`;
+      url = `http://localhost:5000/admin/edit-hotel/${hotelId}`;
     }
 
     try {
@@ -164,6 +164,7 @@ const NewHotelForm = function () {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
         },
         body: JSON.stringify(requestData),
       });
@@ -243,12 +244,13 @@ const NewHotelForm = function () {
   //Hàm fetch hotel Detail
   const fetchHotelDetail = useCallback(async function () {
     try {
-      const res = await fetch(
-        `http://localhost:5000/admin/hotels/${hotelId}?token=${token}`
-      );
+      const res = await fetch(`http://localhost:5000/admin/hotels/${hotelId}`, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
 
       const data = await res.json();
-      console.log(data);
       setHotelDetail(data);
     } catch (err) {}
   }, []);
