@@ -160,8 +160,11 @@ const Authentication = function () {
         const data = await req.json();
         console.log(data);
         // Nhận và lưu token
-        const token = data.token;
-        const email = data.userData.email;
+        let token, email;
+        if (isLogin) {
+          token = data.token;
+          email = data.userData.email;
+        }
 
         // Nếu request trả về token thì lưu lại
         if (token) {
