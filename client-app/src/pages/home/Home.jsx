@@ -14,7 +14,9 @@ const Home = () => {
   // Hàm fetch thông tin chung
   const fetchOverallInfo = async function () {
     try {
-      const res = await fetch("http://localhost:5000/overall");
+      const res = await fetch(
+        "https://booking-clone-server-xe8f.onrender.com/overall"
+      );
       const data = await res.json();
 
       setCities(data.hotelsByCities);

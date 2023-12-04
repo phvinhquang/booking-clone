@@ -25,7 +25,7 @@ const Payment = function ({ userInfo }) {
 
     try {
       const req = await fetch(
-        `http://localhost:5000/transactions/add-transaction`,
+        `https://booking-clone-server-xe8f.onrender.com/transactions/add-transaction`,
         {
           method: "POST",
           headers: {

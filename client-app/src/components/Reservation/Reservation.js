@@ -26,11 +26,14 @@ const Reservation = function () {
 
   const fetchUserInfo = async function () {
     try {
-      const res = await fetch(`http://localhost:5000/userInfo`, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
+      const res = await fetch(
+        `https://booking-clone-server-xe8f.onrender.com/userInfo`,
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
 
       const data = await res.json();
       //Nếu lấy dữ liệu thành công thì lưu vào state

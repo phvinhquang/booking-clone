@@ -135,7 +135,9 @@ const Authentication = function () {
 
       try {
         const req = await fetch(
-          `http://localhost:5000/${isLogin ? "login" : "register"}`,
+          `https://booking-clone-server-xe8f.onrender.com/${
+            isLogin ? "login" : "register"
+          }`,
           {
             method: "POST",
             headers: {

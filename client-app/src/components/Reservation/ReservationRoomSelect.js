@@ -18,16 +18,19 @@ const ReservationRoomSelect = function ({ hotelId }) {
   const availableRoomRequest = useCallback(
     async function () {
       try {
-        const req = await fetch(`http://localhost:5000/rooms/${hotelId}`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            dateStart: startDate,
-            dateEnd: endDate,
-          }),
-        });
+        const req = await fetch(
+          `https://booking-clone-server-xe8f.onrender.com/${hotelId}`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              dateStart: startDate,
+              dateEnd: endDate,
+            }),
+          }
+        );
 
         const data = await req.json();
         const rooms = data.rooms;

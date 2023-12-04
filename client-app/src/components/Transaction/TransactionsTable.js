@@ -15,11 +15,14 @@ const TransactionsTable = function () {
       setIsLoading(true);
 
       try {
-        const res = await fetch(`http://localhost:5000/transactions`, {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        });
+        const res = await fetch(
+          `https://booking-clone-server-xe8f.onrender.com/transactions`,
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        );
 
         if (!res.ok) {
           throw new Error("Sorry, something went wrong :(");

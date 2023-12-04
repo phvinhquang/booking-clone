@@ -81,13 +81,16 @@ function SearchForm(props) {
       dispatch(searchActions.setSearching());
 
       try {
-        const request = await fetch("http://localhost:5000/search", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        });
+        const request = await fetch(
+          "https://booking-clone-server-xe8f.onrender.com/search",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+          }
+        );
 
         const data = await request.json();
         console.log(data);

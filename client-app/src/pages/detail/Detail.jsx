@@ -16,7 +16,7 @@ const Detail = () => {
     const fetchDetail = async function () {
       try {
         const res = await fetch(
-          `http://localhost:5000/hotels/${params.hotelId}`
+          `https://booking-clone-server-xe8f.onrender.com/hotels/${params.hotelId}`
         );
 
         if (!res.ok) {
