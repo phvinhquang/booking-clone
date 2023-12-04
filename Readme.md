@@ -1,4 +1,4 @@
-Link to client-app: booking-clone-d052d.firebaseapp.com
+Link to client-app:bhttps://booking-clone-d052d.firebaseapp.com/
 
 Link to admin-app: https://booking-admin-67503.firebaseapp.com/
 
