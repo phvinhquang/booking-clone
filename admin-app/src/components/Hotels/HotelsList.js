@@ -16,11 +16,14 @@ const HotelsList = function () {
   const fetchHotels = useCallback(async function () {
     setIsLoading(true);
     try {
-      const res = await fetch(`http://localhost:5000/admin/hotels`, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
+      const res = await fetch(
+        `https://booking-clone-server-xe8f.onrender.com/admin/hotels`,
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
 
       const data = await res.json();
       setHotels(data);
@@ -29,18 +32,18 @@ const HotelsList = function () {
     setIsLoading(false);
   }, []);
 
-  //Sửa token sau khi tạo cơ chế auth
   // Hàm request xóa hotel
   const deleteHotel = async function (requestData, hotelId) {
     setIsDeleting({ delete: true, id: hotelId });
 
     try {
       const req = await fetch(
-        `http://localhost:5000/admin/delete-hotel?token=${token}`,
+        `https://booking-clone-server-xe8f.onrender.com/admin/delete-hotel`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
           },
           body: JSON.stringify(requestData),
         }

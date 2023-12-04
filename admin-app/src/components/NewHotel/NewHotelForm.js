@@ -153,9 +153,9 @@ const NewHotelForm = function () {
     setIsLoaing(true);
 
     //Set url theo trạng thái edit hoặc tạo mới
-    let url = `http://localhost:5000/admin/new-hotel`;
+    let url = `https://booking-clone-server-xe8f.onrender.com/admin/new-hotel`;
     if (isEdit) {
-      url = `http://localhost:5000/admin/edit-hotel/${hotelId}`;
+      url = `https://booking-clone-server-xe8f.onrender.com/admin/edit-hotel/${hotelId}`;
     }
 
     try {
@@ -244,11 +244,14 @@ const NewHotelForm = function () {
   //Hàm fetch hotel Detail
   const fetchHotelDetail = useCallback(async function () {
     try {
-      const res = await fetch(`http://localhost:5000/admin/hotels/${hotelId}`, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
+      const res = await fetch(
+        `https://booking-clone-server-xe8f.onrender.com/admin/hotels/${hotelId}`,
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
 
       const data = await res.json();
       setHotelDetail(data);

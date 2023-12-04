@@ -94,9 +94,9 @@ const NewRoomForm = function () {
   const addNewRoom = async function (reqquestData) {
     setIsLoaing(true);
     //Set url theo trạng thái edit hoặc tạo mới
-    let url = `http://localhost:5000/admin/new-room`;
+    let url = `https://booking-clone-server-xe8f.onrender.com/admin/new-room`;
     if (isEdit) {
-      url = `http://localhost:5000/admin/edit-room/${roomId}`;
+      url = `https://booking-clone-server-xe8f.onrender.com/admin/edit-room/${roomId}`;
     }
 
     try {
@@ -170,11 +170,14 @@ const NewRoomForm = function () {
   // Hàm fetch all hotel để đưa vào input option
   const fetchHotels = useCallback(async function () {
     try {
-      const res = await fetch(`http://localhost:5000/admin/hotels`, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
+      const res = await fetch(
+        `https://booking-clone-server-xe8f.onrender.com/admin/hotels`,
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
 
       const data = await res.json();
       setHotels(data);
@@ -189,11 +192,14 @@ const NewRoomForm = function () {
   //Hàm fetch room detail để edit
   const fetchRoomDetail = useCallback(async function () {
     try {
-      const res = await fetch(`http://localhost:5000/admin/rooms/${roomId}`, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
+      const res = await fetch(
+        `https://booking-clone-server-xe8f.onrender.com/admin/rooms/${roomId}`,
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
 
       const data = await res.json();
       setRoomDetail(data);

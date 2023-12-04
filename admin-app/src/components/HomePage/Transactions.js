@@ -16,9 +16,9 @@ const Transactions = function ({ resultsPerPage, title }) {
   const fetchTransactions = useCallback(async function () {
     setIsLoading(true);
 
-    let url = `http://localhost:5000/admin/transactions/latest?resultsPerPage=${resultsPerPage}`;
+    let url = `https://booking-clone-server-xe8f.onrender.com/admin/transactions/latest?resultsPerPage=${resultsPerPage}`;
     if (!resultsPerPage) {
-      url = `http://localhost:5000/admin/transactions/all`;
+      url = `https://booking-clone-server-xe8f.onrender.com/admin/transactions/all`;
     }
 
     try {
