@@ -25,8 +25,15 @@ const Root = function () {
       dispatch(authActions.logIn(email));
     }
 
+    // Auto logout khi token hết hạn
     const tokenDuration = getTokenDuration();
-    console.log(tokenDuration);
+    const timer = setTimeout(() => {
+      dispatch(authActions.logOut());
+    }, tokenDuration);
+
+    return () => {
+      clearTimeout(timer);
+    };
   }, [token, email, dispatch]);
 
   return (
