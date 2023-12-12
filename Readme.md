@@ -18,7 +18,7 @@ This is a booking web application that provides a platform for users to make res
 
 **Client:** React, Redux, React-router
 
-**Client:** React, Redux, React-router
+**Admin:** React, Redux, React-router
 
 **Server:** Node, Express, MongoDB, Mongoose
 
