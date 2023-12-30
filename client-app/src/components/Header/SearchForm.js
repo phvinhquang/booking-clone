@@ -1,9 +1,11 @@
 import "./SearchForm.css";
 import Button from "../../UI/Button";
+import InputNotification from "../../UI/InputNotification";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { searchActions } from "../../store/search";
+import { url } from "../../utils/backendUrl";
 
 // Date range
 import { DateRange } from "react-date-range";
@@ -15,6 +17,7 @@ function SearchForm(props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [cityHasError, setCityHasError] = useState(false);
+  const [showNoti, setShowNoti] = useState(false);
 
   const city = useSelector((state) => state.search.city);
 
@@ -47,9 +50,15 @@ function SearchForm(props) {
     setShowDateRange(false);
   };
 
+  // Hàm theo dõi nhập inpput
   const cityChangeHandler = function (e) {
     setCityHasError(false);
     dispatch(searchActions.setCityValue(e.target.value));
+  };
+
+  // Ấn thông báo lỗi khi click vào inpput
+  const inputFocusHandler = function () {
+    setShowNoti(false);
   };
 
   //Xử lý sự kiện nút Search
@@ -62,7 +71,7 @@ function SearchForm(props) {
     // Kiểm tra người dùng đã nhập điểm đến chưa
     if (city === "") {
       setCityHasError(true);
-      window.alert("Bạn cần nhập điểm đến");
+      setShowNoti(true);
       return;
     }
     // Nếu đã nhập thì chuyển hướng tới trang search
@@ -81,7 +90,7 @@ function SearchForm(props) {
       dispatch(searchActions.setSearching());
 
       try {
-        const request = await fetch("http://localhost:5000/search", {
+        const request = await fetch(`${url}/search`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -110,117 +119,121 @@ function SearchForm(props) {
   const classes = "form " + props.className;
 
   return (
-    <form className={classes}>
-      <div className="input input-place">
-        <i className="fa-solid fa-bed"></i>
-        <input
-          type="text"
-          placeholder="Where are you going"
-          onChange={cityChangeHandler}
-          value={city}
-        />
-      </div>
-      <div className="input input-date">
-        <i className="fa-solid fa-calendar"></i>
-
-        <span onClick={openDateRangeHandler}>{`${format(
-          date[0].startDate,
-          "dd/MM/yy"
-        )} to ${format(date[0].endDate, "dd/MM/yy")} `}</span>
-
-        {showDateRange && (
-          <DateRange
-            className="date-range"
-            editableDateInputs={true}
-            onChange={(item) => {
-              setDate([item.selection]);
-              dispatch(
-                searchActions.setDateValues({
-                  dateStart: format(item.selection.startDate, "yyyy-MM-dd"),
-                  dateEnd: format(item.selection.endDate, "yyyy-MM-dd"),
-                })
-              );
-            }}
-            moveRangeOnFirstSelection={false}
-            minDate={new Date()}
-            ranges={date}
+    <>
+      <form className={classes}>
+        <div className="input input-place">
+          <i className="fa-solid fa-bed"></i>
+          <input
+            onFocus={inputFocusHandler}
+            type="text"
+            placeholder="Where are you going"
+            onChange={cityChangeHandler}
+            value={city}
           />
-        )}
-      </div>
-      <div className="input input-people">
-        <i className="fa-solid fa-person"></i>
-        <span
-          onClick={openOptionsHandler}
-        >{`${options.adult} adults · ${options.children} children · ${options.room} room`}</span>
+          {showNoti && <InputNotification className="input-notification" />}
+        </div>
+        <div className="input input-date">
+          <i className="fa-solid fa-calendar"></i>
 
-        {showOptions && (
-          <div className="options-form">
-            <div className="options-form-item">
-              <span>Adult</span>
-              <div className="options-form-item-actions">
-                <button
-                  className="form-item-button"
-                  onClick={(e) => counterHandler(e, "adult", "decrease")}
-                  disabled={options.adult <= 1}
-                >
-                  -
-                </button>
-                <span>{options.adult}</span>
-                <button
-                  className="form-item-button"
-                  onClick={(e) => counterHandler(e, "adult", "increase")}
-                >
-                  +
-                </button>
+          <span onClick={openDateRangeHandler}>{`${format(
+            date[0].startDate,
+            "dd/MM/yy"
+          )} to ${format(date[0].endDate, "dd/MM/yy")} `}</span>
+
+          {showDateRange && (
+            <DateRange
+              className="date-range"
+              editableDateInputs={true}
+              onChange={(item) => {
+                setDate([item.selection]);
+                dispatch(
+                  searchActions.setDateValues({
+                    dateStart: format(item.selection.startDate, "yyyy-MM-dd"),
+                    dateEnd: format(item.selection.endDate, "yyyy-MM-dd"),
+                  })
+                );
+              }}
+              moveRangeOnFirstSelection={false}
+              minDate={new Date()}
+              ranges={date}
+            />
+          )}
+        </div>
+        <div className="input input-people">
+          <i className="fa-solid fa-person"></i>
+          <span
+            onClick={openOptionsHandler}
+          >{`${options.adult} adults · ${options.children} children · ${options.room} room`}</span>
+
+          {showOptions && (
+            <div className="options-form">
+              <div className="options-form-item">
+                <span>Adult</span>
+                <div className="options-form-item-actions">
+                  <button
+                    className="form-item-button"
+                    onClick={(e) => counterHandler(e, "adult", "decrease")}
+                    disabled={options.adult <= 1}
+                  >
+                    -
+                  </button>
+                  <span>{options.adult}</span>
+                  <button
+                    className="form-item-button"
+                    onClick={(e) => counterHandler(e, "adult", "increase")}
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+
+              <div className="options-form-item">
+                <span>Children</span>
+                <div className="options-form-item-actions">
+                  <button
+                    className="form-item-button"
+                    onClick={(e) => counterHandler(e, "children", "decrease")}
+                    disabled={options.children <= 0}
+                  >
+                    -
+                  </button>
+                  <span>{options.children}</span>
+                  <button
+                    className="form-item-button"
+                    onClick={(e) => counterHandler(e, "children", "increase")}
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+
+              <div className="options-form-item">
+                <span>Room</span>
+                <div className="options-form-item-actions">
+                  <button
+                    className="form-item-button"
+                    onClick={(e) => counterHandler(e, "room", "decrease")}
+                    disabled={options.room <= 1}
+                  >
+                    -
+                  </button>
+                  <span>{options.room}</span>
+                  <button
+                    className="form-item-button"
+                    onClick={(e) => counterHandler(e, "room", "increase")}
+                  >
+                    +
+                  </button>
+                </div>
               </div>
             </div>
-
-            <div className="options-form-item">
-              <span>Children</span>
-              <div className="options-form-item-actions">
-                <button
-                  className="form-item-button"
-                  onClick={(e) => counterHandler(e, "children", "decrease")}
-                  disabled={options.children <= 0}
-                >
-                  -
-                </button>
-                <span>{options.children}</span>
-                <button
-                  className="form-item-button"
-                  onClick={(e) => counterHandler(e, "children", "increase")}
-                >
-                  +
-                </button>
-              </div>
-            </div>
-
-            <div className="options-form-item">
-              <span>Room</span>
-              <div className="options-form-item-actions">
-                <button
-                  className="form-item-button"
-                  onClick={(e) => counterHandler(e, "room", "decrease")}
-                  disabled={options.room <= 1}
-                >
-                  -
-                </button>
-                <span>{options.room}</span>
-                <button
-                  className="form-item-button"
-                  onClick={(e) => counterHandler(e, "room", "increase")}
-                >
-                  +
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-      <Link onClick={searchHandler} className="link-search">
-        <Button className="btn-input-form">Search</Button>
-      </Link>
-    </form>
+          )}
+        </div>
+        <Link onClick={searchHandler} className="link-search">
+          <Button className="btn-input-form">Search</Button>
+        </Link>
+      </form>
+    </>
   );
 }
 

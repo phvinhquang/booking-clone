@@ -2,6 +2,7 @@ import React, { useEffect, useCallback, useState } from "react";
 import classes from "./TransactionsTable.module.css";
 import { getToken } from "../../users/user-data";
 import { format } from "date-fns";
+import { url } from "../../utils/backendUrl";
 
 const TransactionsTable = function () {
   const [transactions, setTransactions] = useState([]);
@@ -15,7 +16,7 @@ const TransactionsTable = function () {
       setIsLoading(true);
 
       try {
-        const res = await fetch(`http://localhost:5000/transactions`, {
+        const res = await fetch(`${url}/transactions`, {
           headers: {
             Authorization: "Bearer " + token,
           },

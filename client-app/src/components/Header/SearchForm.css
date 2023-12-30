@@ -13,6 +13,14 @@
 }
 
 /*Style các phần input*/
+.input {
+  position: relative;
+}
+
+.input-notification {
+  position: absolute;
+}
+
 .input i {
   color: #868e96;
 }

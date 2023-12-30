@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { reserveActions } from "../../store/reservation";
+import { url } from "../../utils/backendUrl";
 // import { format } from "date-fns";
 
 import classes from "./ReservationRoomSelect.module.css";
@@ -18,7 +19,7 @@ const ReservationRoomSelect = function ({ hotelId }) {
   const availableRoomRequest = useCallback(
     async function () {
       try {
-        const req = await fetch(`http://localhost:5000/rooms/${hotelId}`, {
+        const req = await fetch(`${url}/rooms/${hotelId}`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

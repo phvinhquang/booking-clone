@@ -85,7 +85,9 @@ function Header(props) {
             <Link to="/auth?mode=login">Sign in/Register</Link>
           </Button>
         )}
-        {!props.showJustTop && <SearchForm className="form-absolute" />}
+        {!props.showJustTop && !props.isLoading && (
+          <SearchForm className="form-absolute" />
+        )}
       </div>
     </header>
   );

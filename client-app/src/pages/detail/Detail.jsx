@@ -6,6 +6,7 @@ import Footer from "../../components/MainContent/Footer";
 import { useEffect, useState } from "react";
 import styles from "./Detail.module.css";
 import { useParams } from "react-router-dom";
+import { url } from "../../utils/backendUrl";
 
 const Detail = () => {
   const [detail, setDetail] = useState([]);
@@ -15,9 +16,7 @@ const Detail = () => {
   useEffect(() => {
     const fetchDetail = async function () {
       try {
-        const res = await fetch(
-          `http://localhost:5000/hotels/${params.hotelId}`
-        );
+        const res = await fetch(`${url}/hotels/${params.hotelId}`);
 
         if (!res.ok) {
           throw new Error("Something went wrong");

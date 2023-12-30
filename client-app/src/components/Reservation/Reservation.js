@@ -8,6 +8,7 @@ import { getToken } from "../../users/user-data";
 import { useDispatch } from "react-redux";
 import { reserveActions } from "../../store/reservation";
 import { useParams } from "react-router-dom";
+import { url } from "../../utils/backendUrl";
 
 import classes from "./Reservation.module.css";
 
@@ -26,7 +27,7 @@ const Reservation = function () {
 
   const fetchUserInfo = async function () {
     try {
-      const res = await fetch(`http://localhost:5000/userInfo`, {
+      const res = await fetch(`${url}/userInfo`, {
         headers: {
           Authorization: "Bearer " + token,
         },

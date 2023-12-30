@@ -6,6 +6,7 @@ import { reserveActions } from "../../store/reservation";
 import { useEffect } from "react";
 import { getToken } from "../../users/user-data";
 import { useNavigate } from "react-router-dom";
+import { url } from "../../utils/backendUrl";
 
 const Payment = function ({ userInfo }) {
   const dispatch = useDispatch();
@@ -24,17 +25,14 @@ const Payment = function ({ userInfo }) {
     setIsLoading(true);
 
     try {
-      const req = await fetch(
-        `http://localhost:5000/transactions/add-transaction`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-          },
-          body: JSON.stringify(bodyData),
-        }
-      );
+      const req = await fetch(`${url}/transactions/add-transaction`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify(bodyData),
+      });
 
       const data = await req.json();
 
