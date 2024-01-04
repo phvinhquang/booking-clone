@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+
+    <style>
+      header {
+        background: #003580;
+        padding: 20px;
+        color: #fff;
+        text-align: center;
+      }
+
+      main {
+        /* padding: 20px; */
+        margin: 0 15%;
+      }
+
+      ul {
+        list-style: none;
+        padding: 10px 20px;
+        width: 70%;
+        margin: auto;
+
+        border: 1px solid #bbb;
+      }
+      ul li {
+        margin-bottom: 10px;
+      }
+
+      ul li:last-child {
+        margin-bottom: 0;
+      }
+
+      /* h3 {
+        text-align: center;
+      } */
+
+      footer {
+        background: #003580;
+        padding: 20px;
+        color: #fff;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body style="font-family: Arial, sans-serif">
+    <header>
+      <h1 style="margin: 0">Not That Booking.com</h1>
+    </header>
+
+    <main>
+      <h2>Booking Confirmation</h2>
+      <p>Dear <%= data.fullname %>,</p>
+
+      <p>Cảm ơn bạn! Đặt phòng của bạn ở <%= data.hotel %> đã được xác nhận.</p>
+
+      <h3>Chi tiết đặt phòng:</h3>
+      <ul>
+        <li><strong>Hotel:</strong> <%= data.hotel %></li>
+        <li><strong>Check-in:</strong> <%= data.dateStart %></li>
+        <li><strong>Check-out:</strong> <%= data.dateEnd %></li>
+        <li><strong>Loại Phòng:</strong> <%= data.roomTitles %></li>
+        <!-- Add more booking details as needed -->
+      </ul>
+
+      <h3>Chi tiết giá</h3>
+      <ul>
+        <li>
+          <strong>Tổng giá phòng:</strong> <span><%= data.price %> $</span>
+        </li>
+      </ul>
+
+      <h3>Thông tin liên hệ:</h3>
+      <p>Nếu bạn có thắc mắc gì. Vui lòng liên hệ với khách sạn.</p>
+
+      <h3>Hủy phòng:</h3>
+      <p>
+        Nếu bạn muốn hủy hoặc thay đổi đặt phòng của mình. Vui lòng liên hệ với
+        khách sạn.
+      </p>
+
+      <p>
+        Cảm ơn Quý khách đã chọn Booking.com. Chúc Quý khách tận hưởng kỳ nghỉ
+        của mình!
+      </p>
+
+      <p>
+        Best regards,<br />
+        The Booking.com Team
+      </p>
+    </main>
+
+    <footer>
+      <p style="margin: 0">
+        &copy; 2024 Not That Booking.com. All rights reserved.
+      </p>
+    </footer>
+  </body>
+</html>

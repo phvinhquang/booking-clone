@@ -4,6 +4,7 @@ import { useSearchParams, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/auth";
 import useInput from "../../hooks/use-input";
+import { url } from "../../utils/backendUrl";
 
 const Authentication = function () {
   const [error, setError] = useState(null);
@@ -134,18 +135,14 @@ const Authentication = function () {
       setIsLoggingIn(true);
 
       try {
-        const req = await fetch(
-          `https://booking-clone-server-xe8f.onrender.com/${
-            isLogin ? "login" : "register"
-          }`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(postData),
-          }
-        );
+        const req = await fetch(`${url}/${isLogin ? "login" : "register"}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(postData),
+        });
+
 
         //Check lỗi
         if (
@@ -158,10 +155,10 @@ const Authentication = function () {
         }
 
         const data = await req.json();
-        console.log(data);
         // Nhận và lưu token
         let token, email;
-        if (isLogin && req.ok) {
+        if (isLogin && req.status === 201) {
+
           token = data.token;
           email = data.userData.email;
         }
@@ -185,7 +182,7 @@ const Authentication = function () {
 
         //Check lỗi được gửi về từ server
         if (req.status === 401) {
-          throw new Error(data);
+          throw new Error(data.message);
         }
 
         if (req.status === 409) {
@@ -202,6 +199,7 @@ const Authentication = function () {
           navigate("/auth?mode=login");
         }
       } catch (err) {
+        console.log(err);
         setError(err.message);
       }
 
@@ -221,7 +219,10 @@ const Authentication = function () {
           placeholder={`${
             isLogin ? "Your Username or Email" : "Your Username"
           }`}
-          onChange={usernameChangeHandler}
+          onChange={(e) => {
+            setError(false);
+            usernameChangeHandler(e);
+          }}
           onBlur={usernameBlurHandler}
           value={usernameValue}
         />
@@ -236,7 +237,10 @@ const Authentication = function () {
           type="password"
           name="password"
           placeholder="Your Password"
-          onChange={passwordChangeHandler}
+          onChange={(e) => {
+            setError(false);
+            passwordChangeHandler(e);
+          }}
           onBlur={passwordBlurHandler}
           value={passwordValue}
         />

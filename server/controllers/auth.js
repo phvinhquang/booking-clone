@@ -75,9 +75,11 @@ exports.postLogin = (req, res, next) => {
   User.findOne({ username: username })
     .then((user) => {
       if (!user) {
-        res
-          .status(401)
-          .json("Thông tin đăng nhập chưa chính xác, vui lòng thử lại");
+        const err = new Error(
+          "Thông tin đăng nhập chưa chính xác, vui lòng thử lại"
+        );
+        err.statusCode = 401;
+        throw err;
       }
 
       if (user) {

@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { reserveActions } from "../../store/reservation";
+import { url } from "../../utils/backendUrl";
 // import { format } from "date-fns";
 
 import classes from "./ReservationRoomSelect.module.css";
@@ -18,19 +19,17 @@ const ReservationRoomSelect = function ({ hotelId }) {
   const availableRoomRequest = useCallback(
     async function () {
       try {
-        const req = await fetch(
-          `https://booking-clone-server-xe8f.onrender.com/${hotelId}`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              dateStart: startDate,
-              dateEnd: endDate,
-            }),
-          }
-        );
+        const req = await fetch(`${url}/rooms/${hotelId}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            dateStart: startDate,
+            dateEnd: endDate,
+          }),
+        });
+
 
         const data = await req.json();
         const rooms = data.rooms;

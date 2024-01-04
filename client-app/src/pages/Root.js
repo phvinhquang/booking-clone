@@ -27,6 +27,7 @@ const Root = function () {
 
     // Auto logout khi token hết hạn
     const tokenDuration = getTokenDuration();
+
     const timer = setTimeout(() => {
       dispatch(authActions.logOut());
     }, tokenDuration);

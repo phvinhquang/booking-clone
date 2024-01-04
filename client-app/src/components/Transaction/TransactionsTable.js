@@ -1,7 +1,9 @@
 import React, { useEffect, useCallback, useState } from "react";
+import LoadingIndicator from "../../UI/LoadingIndicator";
 import classes from "./TransactionsTable.module.css";
 import { getToken } from "../../users/user-data";
 import { format } from "date-fns";
+import { url } from "../../utils/backendUrl";
 
 const TransactionsTable = function () {
   const [transactions, setTransactions] = useState([]);
@@ -15,14 +17,12 @@ const TransactionsTable = function () {
       setIsLoading(true);
 
       try {
-        const res = await fetch(
-          `https://booking-clone-server-xe8f.onrender.com/transactions`,
-          {
-            headers: {
-              Authorization: "Bearer " + token,
-            },
-          }
-        );
+        const res = await fetch(`${url}/transactions`, {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        });
+
 
         if (!res.ok) {
           throw new Error("Sorry, something went wrong :(");
@@ -76,9 +76,7 @@ const TransactionsTable = function () {
   return (
     <>
       {error && <p className={classes.error}>{error}</p>}
-      {isLoading && (
-        <p className={classes.loading}>Loading your transactions...</p>
-      )}
+      {isLoading && <LoadingIndicator />}
       {transactions.length === 0 && !isLoading && (
         <p className={classes.loading}>Bạn chưa có giao dịch nào</p>
       )}

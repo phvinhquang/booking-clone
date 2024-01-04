@@ -5,6 +5,7 @@ import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store";
 import { useNavigate } from "react-router-dom";
+import { url } from "../../utils/backendUrl";
 
 const LoginForm = function () {
   const navigate = useNavigate();
@@ -46,16 +47,15 @@ const LoginForm = function () {
     setHttpError(false);
 
     try {
-      const req = await fetch(
-        "https://booking-clone-server-xe8f.onrender.com/admin/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(requestData),
-        }
-      );
+
+      const req = await fetch(`${url}/admin/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestData),
+      });
+
 
       const data = await req.json();
 

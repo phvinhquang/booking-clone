@@ -3,9 +3,11 @@ import classes from "./Transactions.module.css";
 import { useEffect, useState, useCallback } from "react";
 import { tokenLoader } from "../../utils/auth";
 import { format } from "date-fns";
+import { url } from "../../utils/backendUrl";
 
 import Card from "../../UI/Card";
 import Table from "../../UI/Table";
+import LoadingIndicator from "../../UI/LoadingIndicator";
 
 const Transactions = function ({ resultsPerPage, title }) {
   const [transactions, setTransactions] = useState([]);
@@ -16,13 +18,14 @@ const Transactions = function ({ resultsPerPage, title }) {
   const fetchTransactions = useCallback(async function () {
     setIsLoading(true);
 
-    let url = `https://booking-clone-server-xe8f.onrender.com/admin/transactions/latest?resultsPerPage=${resultsPerPage}`;
+    let backendUrl = `${url}/admin/transactions/latest?resultsPerPage=${resultsPerPage}`;
     if (!resultsPerPage) {
-      url = `https://booking-clone-server-xe8f.onrender.com/admin/transactions/all`;
+      backendUrl = `${url}/admin/transactions/all`;
+
     }
 
     try {
-      const res = await fetch(url, {
+      const res = await fetch(backendUrl, {
         headers: {
           Authorization: "Bearer " + token,
         },
@@ -75,7 +78,7 @@ const Transactions = function ({ resultsPerPage, title }) {
       <div className={classes.container}>
         <h2>{title}</h2>
 
-        {isLoading && <p>Loading transactions ...</p>}
+        {isLoading && <LoadingIndicator />}
         {!isLoading && (
           <Table
             // className={classes.table}

@@ -1,6 +1,7 @@
 import classes from "./GerneralInfo.module.css";
 import { useEffect, useState } from "react";
 import { tokenLoader } from "../../utils/auth";
+import { url } from "../../utils/backendUrl";
 
 import Card from "../../UI/Card";
 
@@ -11,14 +12,13 @@ const GerneralInfo = function () {
   //Hàm fetch thông tin chung
   const fetchGeneralInfo = async function () {
     try {
-      const res = await fetch(
-        `https://booking-clone-server-xe8f.onrender.com/admin/overall`,
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
-      );
+
+      const res = await fetch(`${url}/admin/overall`, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+
 
       const data = await res.json();
       setGeneralInfo(data);

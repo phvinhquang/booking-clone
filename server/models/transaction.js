@@ -9,6 +9,7 @@ const transactionSchema = new Schema({
     {
       _id: false,
       roomType: { type: Schema.Types.ObjectId, required: true, ref: "Room" },
+      roomTitle: { type: String, required: true },
       roomNumbers: { type: Array, required: true },
     },
   ],

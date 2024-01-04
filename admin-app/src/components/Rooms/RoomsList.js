@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import classes from "./RoomsList.module.css";
 import Table from "../../UI/Table";
+import LoadingIndicator from "../../UI/LoadingIndicator";
 import { useState, useCallback, useEffect } from "react";
 import { tokenLoader } from "../../utils/auth";
+import { url } from "../../utils/backendUrl";
 
 const RoomsList = function () {
   const [rooms, setRooms] = useState([]);
@@ -17,14 +19,12 @@ const RoomsList = function () {
     setIsLoading(true);
 
     try {
-      const res = await fetch(
-        `https://booking-clone-server-xe8f.onrender.com/admin/rooms`,
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
-      );
+      const res = await fetch(`${url}/admin/rooms`, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+
 
       const data = await res.json();
       setRooms(data);
@@ -38,17 +38,15 @@ const RoomsList = function () {
     setIsDeleting({ delete: true, id: roomId });
 
     try {
-      const req = await fetch(
-        `https://booking-clone-server-xe8f.onrender.com/admin/delete-room`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-          },
-          body: JSON.stringify(requestData),
-        }
-      );
+      const req = await fetch(`${url}/admin/delete-room`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify(requestData),
+      });
+
 
       const data = await req.json();
 
@@ -97,7 +95,7 @@ const RoomsList = function () {
         </div>
       </div>
 
-      {isLoading && <p>Loading Rooms List ...</p>}
+      {isLoading && <LoadingIndicator />}
       {!isLoading && (
         <Table
           resultsPerPage={rooms.length}
