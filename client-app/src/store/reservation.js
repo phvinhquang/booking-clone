@@ -59,7 +59,8 @@ const reserveSlice = createSlice({
       if (!existingRoom) {
         updatedRooms.push({
           roomType: action.payload.roomId,
-          price: action.payload.price,
+          roomTitle: action.payload.title,
+          // price: action.payload.price,
           roomNumbers: [action.payload.checkedRoom],
         });
       }
@@ -131,7 +132,7 @@ const reserveSlice = createSlice({
         price: updatedPrice,
       };
 
-      console.log("unchecked", newState);
+      // console.log("unchecked", newState);
       return newState;
     },
 
