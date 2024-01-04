@@ -2,7 +2,9 @@ import classes from "./HotelsList.module.css";
 import { useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import Table from "../../UI/Table";
+import LoadingIndicator from "../../UI/LoadingIndicator";
 import { tokenLoader } from "../../utils/auth";
+import { url } from "../../utils/backendUrl";
 
 const HotelsList = function () {
   const [hotels, setHotels] = useState([]);
@@ -16,7 +18,7 @@ const HotelsList = function () {
   const fetchHotels = useCallback(async function () {
     setIsLoading(true);
     try {
-      const res = await fetch(`http://localhost:5000/admin/hotels`, {
+      const res = await fetch(`${url}/admin/hotels`, {
         headers: {
           Authorization: "Bearer " + token,
         },
@@ -35,16 +37,13 @@ const HotelsList = function () {
     setIsDeleting({ delete: true, id: hotelId });
 
     try {
-      const req = await fetch(
-        `http://localhost:5000/admin/delete-hotel?token=${token}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(requestData),
-        }
-      );
+      const req = await fetch(`${url}/admin/delete-hotel?token=${token}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestData),
+      });
 
       const data = await req.json();
 
@@ -102,7 +101,7 @@ const HotelsList = function () {
       </div>
 
       <div className={classes["hotels-list-container"]}>
-        {isLoading && <p>Loading Hotels List ...</p>}
+        {isLoading && <LoadingIndicator />}
         {!isLoading && (
           <Table resultsPerPage={hotels.length} totalPage="1">
             <thead>

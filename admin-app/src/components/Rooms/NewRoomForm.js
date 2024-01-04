@@ -4,6 +4,7 @@ import { useState, useCallback, useEffect, useRef } from "react";
 import useInput from "../../hooks/use-input";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { tokenLoader } from "../../utils/auth";
+import { url } from "../../utils/backendUrl";
 
 const NewRoomForm = function () {
   const [hotels, setHotels] = useState([]);
@@ -94,9 +95,9 @@ const NewRoomForm = function () {
   const addNewRoom = async function (reqquestData) {
     setIsLoaing(true);
     //Set url theo trạng thái edit hoặc tạo mới
-    let url = `http://localhost:5000/admin/new-room`;
+    let url = `${url}/admin/new-room`;
     if (isEdit) {
-      url = `http://localhost:5000/admin/edit-room/${roomId}`;
+      url = `${url}/admin/edit-room/${roomId}`;
     }
 
     try {
@@ -170,7 +171,7 @@ const NewRoomForm = function () {
   // Hàm fetch all hotel để đưa vào input option
   const fetchHotels = useCallback(async function () {
     try {
-      const res = await fetch(`http://localhost:5000/admin/hotels`, {
+      const res = await fetch(`${url}/admin/hotels`, {
         headers: {
           Authorization: "Bearer " + token,
         },
@@ -189,7 +190,7 @@ const NewRoomForm = function () {
   //Hàm fetch room detail để edit
   const fetchRoomDetail = useCallback(async function () {
     try {
-      const res = await fetch(`http://localhost:5000/admin/rooms/${roomId}`, {
+      const res = await fetch(`${url}/admin/rooms/${roomId}`, {
         headers: {
           Authorization: "Bearer " + token,
         },

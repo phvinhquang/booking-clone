@@ -4,6 +4,7 @@ import useInput from "../../hooks/use-input";
 import { useState, useCallback, useEffect, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { tokenLoader } from "../../utils/auth";
+import { url } from "../../utils/backendUrl";
 
 const NewHotelForm = function () {
   const navigate = useNavigate();
@@ -153,9 +154,9 @@ const NewHotelForm = function () {
     setIsLoaing(true);
 
     //Set url theo trạng thái edit hoặc tạo mới
-    let url = `http://localhost:5000/admin/new-hotel`;
+    let url = `${url}/admin/new-hotel`;
     if (isEdit) {
-      url = `http://localhost:5000/admin/edit-hotel/${hotelId}`;
+      url = `${url}/admin/edit-hotel/${hotelId}`;
     }
 
     try {
@@ -244,7 +245,7 @@ const NewHotelForm = function () {
   //Hàm fetch hotel Detail
   const fetchHotelDetail = useCallback(async function () {
     try {
-      const res = await fetch(`http://localhost:5000/admin/hotels/${hotelId}`, {
+      const res = await fetch(`${url}/admin/hotels/${hotelId}`, {
         headers: {
           Authorization: "Bearer " + token,
         },

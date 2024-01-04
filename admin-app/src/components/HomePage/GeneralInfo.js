@@ -1,6 +1,7 @@
 import classes from "./GerneralInfo.module.css";
 import { useEffect, useState } from "react";
 import { tokenLoader } from "../../utils/auth";
+import { url } from "../../utils/backendUrl";
 
 import Card from "../../UI/Card";
 
@@ -11,7 +12,7 @@ const GerneralInfo = function () {
   //Hàm fetch thông tin chung
   const fetchGeneralInfo = async function () {
     try {
-      const res = await fetch(`http://localhost:5000/admin/overall?token`, {
+      const res = await fetch(`${url}/admin/overall`, {
         headers: {
           Authorization: "Bearer " + token,
         },

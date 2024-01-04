@@ -5,6 +5,7 @@ import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store";
 import { useNavigate } from "react-router-dom";
+import { url } from "../../utils/backendUrl";
 
 const LoginForm = function () {
   const navigate = useNavigate();
@@ -46,7 +47,7 @@ const LoginForm = function () {
     setHttpError(false);
 
     try {
-      const req = await fetch("http://localhost:5000/admin/login", {
+      const req = await fetch(`${url}/admin/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
