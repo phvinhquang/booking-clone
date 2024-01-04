@@ -98,6 +98,7 @@ const NewRoomForm = function () {
     let url = `${url}/admin/new-room`;
     if (isEdit) {
       url = `${url}/admin/edit-room/${roomId}`;
+
     }
 
     try {
@@ -177,6 +178,7 @@ const NewRoomForm = function () {
         },
       });
 
+
       const data = await res.json();
       setHotels(data);
     } catch (err) {}
@@ -195,6 +197,7 @@ const NewRoomForm = function () {
           Authorization: "Bearer " + token,
         },
       });
+
 
       const data = await res.json();
       setRoomDetail(data);

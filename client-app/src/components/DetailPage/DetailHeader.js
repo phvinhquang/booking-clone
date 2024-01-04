@@ -1,7 +1,5 @@
 import styles from "./DetailHeader.module.css";
 
-import Button from "../../UI/Button";
-
 function DetailHeader({ hotel }) {
   return (
     <div className={styles["header-container"]}>

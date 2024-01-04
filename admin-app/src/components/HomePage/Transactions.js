@@ -21,6 +21,7 @@ const Transactions = function ({ resultsPerPage, title }) {
     let backendUrl = `${url}/admin/transactions/latest?resultsPerPage=${resultsPerPage}`;
     if (!resultsPerPage) {
       backendUrl = `${url}/admin/transactions/all`;
+
     }
 
     try {

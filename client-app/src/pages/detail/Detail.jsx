@@ -18,6 +18,7 @@ const Detail = () => {
       try {
         const res = await fetch(`${url}/hotels/${params.hotelId}`);
 
+
         if (!res.ok) {
           throw new Error("Something went wrong");
         }

@@ -23,6 +23,7 @@ const TransactionsTable = function () {
           },
         });
 
+
         if (!res.ok) {
           throw new Error("Sorry, something went wrong :(");
         }

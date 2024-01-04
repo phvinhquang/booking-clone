@@ -30,6 +30,7 @@ const ReservationRoomSelect = function ({ hotelId }) {
           }),
         });
 
+
         const data = await req.json();
         const rooms = data.rooms;
         setAvailableRooms(rooms);

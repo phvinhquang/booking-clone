@@ -25,6 +25,7 @@ const RoomsList = function () {
         },
       });
 
+
       const data = await res.json();
       setRooms(data);
     } catch (err) {}
@@ -45,6 +46,7 @@ const RoomsList = function () {
         },
         body: JSON.stringify(requestData),
       });
+
 
       const data = await req.json();
 

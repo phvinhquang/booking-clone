@@ -49,6 +49,7 @@ const Reservation = function () {
         if (req.status === 201) navigate("/transactions");
       } catch (err) {
         setError(err.message);
+
       }
 
       setIsLoading(false);

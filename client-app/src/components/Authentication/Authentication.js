@@ -143,6 +143,7 @@ const Authentication = function () {
           body: JSON.stringify(postData),
         });
 
+
         //Check lỗi
         if (
           !req.ok &&
@@ -157,6 +158,7 @@ const Authentication = function () {
         // Nhận và lưu token
         let token, email;
         if (isLogin && req.status === 201) {
+
           token = data.token;
           email = data.userData.email;
         }
