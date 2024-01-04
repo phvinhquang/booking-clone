@@ -18,11 +18,13 @@ const HotelsList = function () {
   const fetchHotels = useCallback(async function () {
     setIsLoading(true);
     try {
+
       const res = await fetch(`${url}/admin/hotels`, {
         headers: {
           Authorization: "Bearer " + token,
         },
       });
+
 
       const data = await res.json();
       setHotels(data);
@@ -31,12 +33,12 @@ const HotelsList = function () {
     setIsLoading(false);
   }, []);
 
-  //Sửa token sau khi tạo cơ chế auth
   // Hàm request xóa hotel
   const deleteHotel = async function (requestData, hotelId) {
     setIsDeleting({ delete: true, id: hotelId });
 
     try {
+
       const req = await fetch(`${url}/admin/delete-hotel?token=${token}`, {
         method: "POST",
         headers: {
@@ -44,6 +46,7 @@ const HotelsList = function () {
         },
         body: JSON.stringify(requestData),
       });
+
 
       const data = await req.json();
 

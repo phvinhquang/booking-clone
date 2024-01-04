@@ -47,6 +47,7 @@ const LoginForm = function () {
     setHttpError(false);
 
     try {
+
       const req = await fetch(`${url}/admin/login`, {
         method: "POST",
         headers: {
@@ -54,6 +55,7 @@ const LoginForm = function () {
         },
         body: JSON.stringify(requestData),
       });
+
 
       const data = await req.json();
 

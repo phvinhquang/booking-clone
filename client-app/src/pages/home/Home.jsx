@@ -21,6 +21,7 @@ const Home = () => {
 
     try {
       const res = await fetch(`${url}/overall`);
+
       const data = await res.json();
 
       setCities(data.hotelsByCities);

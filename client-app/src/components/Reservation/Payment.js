@@ -6,6 +6,7 @@ const Payment = function ({ userInfo }) {
   const dispatch = useDispatch();
   const totalBill = useSelector((state) => state.reserve.price);
 
+
   // Xử lý sự kiện chọn payment method
   const selectChangeHandler = function (e) {
     if (e.target.value === "credit-card") {

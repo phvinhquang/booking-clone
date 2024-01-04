@@ -157,6 +157,7 @@ const NewHotelForm = function () {
     let url = `${url}/admin/new-hotel`;
     if (isEdit) {
       url = `${url}/admin/edit-hotel/${hotelId}`;
+
     }
 
     try {
@@ -250,6 +251,7 @@ const NewHotelForm = function () {
           Authorization: "Bearer " + token,
         },
       });
+
 
       const data = await res.json();
       setHotelDetail(data);

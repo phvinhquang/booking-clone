@@ -85,6 +85,7 @@ function SearchForm(props) {
     // Lưu form vào storage để khi reload vẫn có dữ liệu search
     sessionStorage.setItem("searchForm", JSON.stringify(formData));
 
+
     dispatch(searchActions.setSearching());
     // Chuyển hướng tới trang search
     navigate("/search");

@@ -47,6 +47,7 @@ const Reservation = function () {
         }
       } catch (err) {
         setError(err.message);
+
       }
 
       setIsLoading(false);
