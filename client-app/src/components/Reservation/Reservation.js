@@ -31,7 +31,7 @@ const Reservation = function () {
       setIsLoading(true);
 
       try {
-        const req = await fetch(`${url}/transactions/add-transactionzz`, {
+        const req = await fetch(`${url}/transactions/add-transaction`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -45,13 +45,14 @@ const Reservation = function () {
         if (req.status === 501 || req.status === 401 || req.status === 403) {
           setError(data);
         }
+
+        if (req.status === 201) navigate("/transactions");
       } catch (err) {
         setError(err.message);
 
       }
 
       setIsLoading(false);
-      navigate("/transactions");
     },
     [token, navigate]
   );
