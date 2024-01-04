@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const nodemailer = require("nodemailer");
 const path = require("path");
 const fs = require("fs");
@@ -15,14 +17,16 @@ const transport = nodemailer.createTransport({
   secure: true,
   auth: {
     user: "phvinhquang63@gmail.com",
-    pass: "khxg pxhm zdnk jdab",
+    pass: process.env.NODEMAILER_PASSWORD,
   },
 });
 
 exports.addTransaction = async (req, res, next) => {
-  let customerEmail, customerFullname;
+  // let customerEmail, customerFullname;
   try {
     const user = await User.findById(req.userId);
+    const hotelInfo = await Hotel.findById(req.body.hotel);
+    const hotelName = hotelInfo.name;
 
     const username = user.username;
     const hotel = req.body.hotel;
@@ -33,8 +37,10 @@ exports.addTransaction = async (req, res, next) => {
     const payment = req.body.payment;
     const status = req.body.status;
 
-    customerEmail = user.email;
-    customerFullname = user.fullName;
+    // console.log(req.body.dateStart, req.body.dateEnd);
+
+    // customerEmail = user.email;
+    // customerFullname = user.fullName;
 
     const transaction = new Transaction({
       user: username,
@@ -47,13 +53,28 @@ exports.addTransaction = async (req, res, next) => {
       status: status,
     });
 
+    const emailData = {
+      user: user.fullName,
+      email: user.email,
+      hotel: hotelName,
+      dateStart: req.body.dateStart,
+      dateEnd: req.body.dateEnd,
+      rooms: room,
+      price: price,
+    };
+
     await transaction.save();
 
     // Gửi response
     res.status(201).json("Reservation created !!!");
+
+    await sendConfirmationEmail(emailData);
   } catch (err) {
-    // console.log(err);
-    res.status(501).json("Can not create reservation");
+    console.log(err);
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
   }
 };
 
@@ -73,38 +94,39 @@ exports.getTransactions = (req, res, next) => {
     });
 };
 
-async function sendConfirmationEmail(customerFullname, customerEmail, rooms) {
+async function sendConfirmationEmail(emailData) {
   try {
     // Xử lý dữ liệu
-    const hotelInfo = await Hotel.findById(req.body.hotel);
-    const hotelName = hotelInfo.name;
 
-    const roomIds = rooms.map((r) => r.roomId);
+    const roomTitles = emailData.rooms.map((r) => r.roomTitle);
 
     const emailPath = path.join(
       __dirname,
       "../",
       "views",
-      "email-confirm-order.ejs"
+      "booking-confirm-email.ejs"
     );
 
     const emailToSend = await ejs.renderFile(emailPath, {
       data: {
-        fullname: customerFullname,
-        email: customerEmail,
-        hotel: hotelName,
-        // address: customerAddress,
+        fullname: emailData.user,
+        dateStart: emailData.dateStart,
+        dateEnd: emailData.dateEnd,
+        hotel: emailData.hotel,
+        roomTitles: roomTitles.join(", "),
+        rooms: emailData.rooms,
+        price: emailData.price,
       },
     });
 
     // Gửi email
     await transport.sendMail({
       from: "Fake Booking.com <booking@gmail.com>", // sender address
-      to: customerEmail,
+      to: emailData.email,
       subject: "Fake Booking.com - Reservation Confirm",
       html: emailToSend,
     });
   } catch (err) {
-    throw err;
+    console.log(err);
   }
 }
