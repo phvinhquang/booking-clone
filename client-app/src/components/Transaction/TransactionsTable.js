@@ -1,4 +1,5 @@
 import React, { useEffect, useCallback, useState } from "react";
+import LoadingIndicator from "../../UI/LoadingIndicator";
 import classes from "./TransactionsTable.module.css";
 import { getToken } from "../../users/user-data";
 import { format } from "date-fns";
@@ -74,9 +75,7 @@ const TransactionsTable = function () {
   return (
     <>
       {error && <p className={classes.error}>{error}</p>}
-      {isLoading && (
-        <p className={classes.loading}>Loading your transactions...</p>
-      )}
+      {isLoading && <LoadingIndicator />}
       {transactions.length === 0 && !isLoading && (
         <p className={classes.loading}>Bạn chưa có giao dịch nào</p>
       )}

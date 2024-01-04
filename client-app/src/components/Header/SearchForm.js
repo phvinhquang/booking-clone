@@ -5,7 +5,6 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { searchActions } from "../../store/search";
-import { url } from "../../utils/backendUrl";
 
 // Date range
 import { DateRange } from "react-date-range";
@@ -16,11 +15,11 @@ import { format } from "date-fns";
 function SearchForm(props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [cityHasError, setCityHasError] = useState(false);
   const [showNoti, setShowNoti] = useState(false);
-
   const city = useSelector((state) => state.search.city);
-
+  const searchData = JSON.parse(sessionStorage.getItem("searchForm")) ?? "";
+  const dateStart = useSelector((state) => state.search.dateStart);
+  const dateEnd = useSelector((state) => state.search.dateEnd);
   const options = {
     adult: useSelector((state) => state.search.adult),
     children: useSelector((state) => state.search.children),
@@ -30,8 +29,10 @@ function SearchForm(props) {
   // Date range State
   const [date, setDate] = useState([
     {
-      startDate: new Date(useSelector((state) => state.search.dateStart)),
-      endDate: new Date(useSelector((state) => state.search.dateEnd)),
+      startDate: searchData.dateStart
+        ? new Date(searchData.dateStart)
+        : new Date(),
+      endDate: searchData.dateEnd ? new Date(searchData.dateEnd) : new Date(),
       key: "selection",
     },
   ]);
@@ -52,7 +53,6 @@ function SearchForm(props) {
 
   // Hàm theo dõi nhập inpput
   const cityChangeHandler = function (e) {
-    setCityHasError(false);
     dispatch(searchActions.setCityValue(e.target.value));
   };
 
@@ -66,16 +66,12 @@ function SearchForm(props) {
     e.preventDefault();
     setShowDateRange(false);
     setShowOptions(false);
-    setCityHasError(false);
 
     // Kiểm tra người dùng đã nhập điểm đến chưa
     if (city === "") {
-      setCityHasError(true);
       setShowNoti(true);
       return;
     }
-    // Nếu đã nhập thì chuyển hướng tới trang search
-    navigate("/search");
 
     // Data để gửi request
     const formData = {
@@ -86,27 +82,12 @@ function SearchForm(props) {
       room: options.room,
     };
 
-    const searchRequest = async function () {
-      dispatch(searchActions.setSearching());
+    // Lưu form vào storage để khi reload vẫn có dữ liệu search
+    sessionStorage.setItem("searchForm", JSON.stringify(formData));
 
-      try {
-        const request = await fetch(`${url}/search`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        });
-
-        const data = await request.json();
-        console.log(data);
-        dispatch(searchActions.setResult(data));
-      } catch (err) {}
-
-      dispatch(searchActions.setNotSearching());
-    };
-
-    searchRequest();
+    dispatch(searchActions.setSearching());
+    // Chuyển hướng tới trang search
+    navigate("/search");
   };
 
   //Hàm thay đổi options

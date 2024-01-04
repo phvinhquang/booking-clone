@@ -26,7 +26,7 @@ const Root = function () {
     }
 
     const tokenDuration = getTokenDuration();
-    console.log(tokenDuration);
+    // console.log(tokenDuration);
   }, [token, email, dispatch]);
 
   return (

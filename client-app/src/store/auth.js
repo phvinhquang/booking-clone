@@ -14,6 +14,7 @@ const authSlice = createSlice({
       localStorage.removeItem("token");
       localStorage.removeItem("email");
       localStorage.removeItem("tokenExpiryDate");
+      sessionStorage.removeItem("searchForm");
       return { isAuthenticated: false, email: null };
     },
   },

@@ -154,7 +154,6 @@ const Authentication = function () {
         }
 
         const data = await req.json();
-        console.log(data);
         // Nhận và lưu token
         let token, email;
         if (isLogin && req.status === 201) {
@@ -218,7 +217,10 @@ const Authentication = function () {
           placeholder={`${
             isLogin ? "Your Username or Email" : "Your Username"
           }`}
-          onChange={usernameChangeHandler}
+          onChange={(e) => {
+            setError(false);
+            usernameChangeHandler(e);
+          }}
           onBlur={usernameBlurHandler}
           value={usernameValue}
         />
@@ -233,7 +235,10 @@ const Authentication = function () {
           type="password"
           name="password"
           placeholder="Your Password"
-          onChange={passwordChangeHandler}
+          onChange={(e) => {
+            setError(false);
+            passwordChangeHandler(e);
+          }}
           onBlur={passwordBlurHandler}
           value={passwordValue}
         />
